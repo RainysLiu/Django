@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传成功</title>
+</head>
+<body>
+<h2 style="color: darkgreen">你已将以下图片成功上传到{{ imgpath }}</h2><br>
+<img src="{% static imgpath  %}"/> <br>
+<a href={% url 'myapp:goupload' %}>点此继续上传</a>
+</body>
+</html>
+

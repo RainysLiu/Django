@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成功页面</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+        欢迎{{ login_name }}，登录成功！
+        <a href="{% url 'myapp:logout' %}">登出</a>
+    {% else %}
+        您还未登录，请先<a href="{% url 'myapp:gologin' %}">登录</a>
+    {% endif %}
+</body>
+</html>

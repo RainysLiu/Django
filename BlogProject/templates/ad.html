@@ -1,0 +1,45 @@
+{% load static %}
+<div class="banner">
+      <div id="slide-holder">
+        <div id="slide-runner"> <a href="{% url 'myblog:goarticle' %}?id=9"><img id="slide-img-1" src="{% static 'images/a1.jpg' %}"  alt="" /></a> <a href="{% url 'myblog:goarticle' %}?id=7"><img style="width:665px;height:362px " id="slide-img-2" src="{% static 'images/a2.jpg' %}"  alt="" /></a> <a href="{% url 'myblog:goarticle' %}?id=6" ><img style="width:665px;height:362px " id="slide-img-3" src="{% static 'images/a3.jpg' %}"  alt="" /></a> <a href="{% url 'myblog:goarticle' %}?id=4" ><img style="width:665px;height:362px " id="slide-img-4" src="{% static 'images/a4.jpg' %}"  alt="" /></a>
+          <div id="slide-controls">
+            <p id="slide-client" class="text"><strong></strong><span></span></p>
+            <p id="slide-desc" class="text"></p>
+            <p id="slide-nav"></p>
+          </div>
+        </div>
+      </div>
+      <script>
+    if(!window.slider) {
+    var slider={};
+  }
+
+
+
+  slider.data= [
+    {
+        "id":"slide-img-1", // 与slide-runner中的img标签id对应
+        "client":"时事",
+        "desc":"习近平这样指导党的宣传思想工作" //这里修改描述
+    },
+    {
+        "id":"slide-img-2",
+        "client":"科技",
+        "desc":"消息称新款iPhone于9月初接受预定"
+    },
+    {
+        "id":"slide-img-3",
+        "client":"娱乐",
+        "desc":"Skr天王吴亦凡"
+    },
+    {
+        "id":"slide-img-4",
+        "client":"娱乐",
+        "desc":"雷布斯将发布2018全新专辑"
+        }
+  ];
+
+    </script>
+    </div>
+    <!-- banner代码 结束 -->
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
+	<script type="text/javascript">
+       $(function(){
+        $("#myform").submit(function(evt){
+              if($("#uname").val()==""){
+                   alert("用户名不能为空！");
+                   evt.preventDefault(); // 阻止表单的默认提交行为
+                   return;   // 结束函数的执行
+              }
+              if($("#passwd").val().length<6){
+                   alert("密码长度不能小于6位！");
+                   evt.preventDefault();   // 阻止表单的默认提交行为
+                   return;   // 结束函数的执行
+              }
+         });
+     })
+	</script>
+</head>
+<body>
+	<form action="/homework/loginReaction/" method="post" id="myform">
+	    用户名：<input type="text" name="username" id="uname"/>  <br/><br/>
+	    密码：<input type="password" name="pwd" id="passwd"> <br/><br/>
+        性别：男：  <input type="radio" name="sex" value="男" checked="true" />
+              女：  <input type="radio" name="sex" value="女"/>    <br/> <br/>
+	    <input type="submit" value="提交"/>
+	</form>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
+	<script type="text/javascript">
+         // 获取Ajax对象
+        function getXHR() {
+            var xhr = null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            return xhr;
+        }
+            $(function(){
+            $("#myform").submit(function(evt){
+              if($("#uname").val()==""){
+                   alert("用户名不能为空！");
+                   evt.preventDefault(); // 阻止表单的默认提交行为
+                   return;   // 结束函数的执行
+              }
+              if($("#passwd").val().length<6){
+                   alert("密码长度不能小于6位！");
+                   evt.preventDefault();   // 阻止表单的默认提交行为
+                   return;   // 结束函数的执行
+              }
+             });
+         })
+         function checkRegName(){
+            var xhr=getXHR();
+            var regvalue=document.getElementById("uname").value;  // 获取用户名文本框中输入的内容
+            xhr.open("get","/homework/reg/check/"+regvalue+"/",true);
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+                        var jsonStr = xhr.responseText;  // 接收服务端发送来的文本信息
+                        console.log(jsonStr);
+                        var jsObj= JSON.parse(jsonStr);  // 将服务端返回的JSON字符串转换成JavaScript对象
+                        var isok = jsObj.isok;  // 获取key为isok对应的值
+                        var spanMsg=document.getElementById("msg");
+                        if(isok=="ok"){
+                            spanMsg.style.color='green';
+                        }else{
+                             spanMsg.style.color='red';
+                        }
+                        spanMsg.innerHTML=jsObj.info;
+                    }
+                }
+            }
+            xhr.send(null);
+        }
+	</script>
+</head>
+<body>
+	<form action="/homework/reg/success/" method="post" id="myform" >
+	    用户名：<input type="text" name="username" id="uname"  onblur="checkRegName()"/> <span id="msg"></span> <br/>
+	    密码：<input type="password" name="pwd" id="passwd"> <br/><br/>
+        性别：男：  <input type="radio" name="sex" value="男" checked="true" />
+              女：  <input type="radio" name="sex" value="女"/>    <br/> <br/>
+	    <input type="submit" value="提交"/>
+	</form>
+</body>
+</html>

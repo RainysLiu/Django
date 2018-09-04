@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>省市级联效果</title>
+	<script type="text/javascript">
+	    var info=[];
+	    info["陕西省"]=["西安市","汉中市","咸阳市","延安市"];
+	    info["江苏省"]=["南京市","苏州市","徐州市"];
+	    info["四川省"]=["成都市","绵阳市","广元市"];
+	    var other=[];
+	    other["西安市"]=["雁塔区","未央区","长安区","莲湖区"];
+	    other["汉中市"]=["汉台区","洋县","宁强县","城固县"];
+	    other["咸阳市"]=["兴平区","乾都区"];
+	    other["延安市"]=["延安区","延县"];
+	    other["南京市"]=["玄武区","江宁区"];
+	    other["成都市"]=["武侯区","犀浦区"];
+        function showCities(dom)
+        {
+        	var province_value=dom.value;  // 获取当前省份下拉列表框选择的值
+        	var cities=info[province_value];  // 获取选择省份对应的城市数组
+        	var city=document.getElementById("city");
+        	city.length=0;   // 先清空城市下拉列表框的所有选项
+        	for(var key in cities)
+        	{
+        		// 实例化城市Option对象
+                var cityOption=new Option(cities[key],cities[key]);
+                city.add(cityOption);
+        	}
+        	showothers(city);
+        }
+        function showothers(dom)
+        {
+        	var city_value=dom.value;  // 获取当前省份下拉列表框选择的值
+        	var others=other[city_value];  // 获取选择省份对应的城市数组
+        	var s3=document.getElementById("other");
+        	s3.length=0;   // 先清空城市下拉列表框的所有选项
+        	for(var key in others)
+        	{
+        		// 实例化Option对象
+                var s3Option=new Option(others[key],others[key]);
+                s3.add(s3Option);
+        	}
+        }
+
+	    window.onload=function(){
+	    	var province=document.getElementById("province");
+	    	for(var key in info){
+	    		// 实例化Option对象，一个Option对象一个选项
+	    		var option=new Option(key,key);
+	    		province.add(option);   // 使用程序向省份下拉列表框添加选项
+	    	}
+	    }
+	</script>
+</head>
+<body>
+	省份：<select id="province" onchange="showCities(this)">
+	          <option>---请选择省份---</option>
+	      </select>
+	城市：<select id="city" style="width:100px"  onchange="showothers(this)">
+				<option>---请选择城市---</option>
+	      </select>
+	区/县：<select id="other" style="width:100px">
+	      </select>
+	      <br/></br>
+</body>
+</html>
+

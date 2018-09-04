@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有班级信息</title>
+</head>
+<body>
+<h2>所有班级信息如下:</h2>
+   <table border="1" align="center">
+        <thead>
+           <tr>
+               <th>班级号</th>
+               <th>班级名</th>
+           </tr>
+        </thead>
+        <tbody>
+            {% for cls in clses %}
+                 <tr>
+                    <td>{{ cls.id }}</td>
+                    <td>{{ cls.name }}</td>
+                 </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<br>
+<a href="{% url 'myapp:gostartui' %}">点此返回首页</a>
+</body>
+</html>

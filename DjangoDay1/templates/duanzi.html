@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原生Ajax获取段子</title>
+	<script type="text/javascript">
+	    function getXHR(){  // 该函数用来获取Ajax对象
+            var xhr=null;
+            if(window.XMLHttpRequest){   // 判断浏览器是否支持XMLHttpRequest对象
+                xhr=new XMLHttpRequest();  // 主流浏览器支持的Ajax对象
+            }else{
+            	xhr=new ActiveXObject("Microsoft.XMLHTTP");  // 老版IE浏览器支持的Ajax对象
+            }
+            return xhr;
+	    }
+	    function getInfo(){
+            xhr=getXHR();   // 获取Ajax对象
+            // 指定服务器地址
+            xhr.open('get','https://www.apiopen.top/satinApi?type=1&page=1',true);
+            xhr.onreadystatechange=function(){
+            	if(xhr.readyState==4){
+            		if(xhr.status==200){
+            			var info=xhr.responseText;   // 接收服务器响应的信息
+            			var jsObj=JSON.parse(info);  // 将JSON字符串转换为JavaScript对象
+                        var array=jsObj.data;
+                        var result="";
+                        for(index=0;index<array.length;index++){
+                        	var data=array[index];
+                        	result+=data["text"]+"<br/>";
+                        	result+="<hr/>";
+                        }
+            			document.getElementById("mydiv").innerHTML=result;
+            		}
+            	}
+            };
+            xhr.send(null); // 发送请求
+	    }
+	</script>
+</head>
+<body>
+    <input type="button"  value="点击获取段子"
+        onclick="getInfo()"/>
+	<div id="mydiv"></div>
+</body>
+</html>
+
+
+

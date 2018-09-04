@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href="{% static 'css/reglogin.css' %}" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="main">
+		<div class="header" >
+			<h1>登陆页面!</h1>
+		</div>
+		<p></p>
+			<form action="{% url 'myblog:login' %}" method="post">
+                {% csrf_token %}<msg style="color: red">{{ msg }}</msg>
+				<ul class="right-form">
+					<h2>登录:</h2>
+					用户名：<li><input type="text" name="logname" placeholder="Username" required/></li>
+					密码：<li><input type="password" name="logpwd" placeholder="Password" required/></li>
+                    <input type="submit" value="登入" >
+					<div class="clear"> </div>
+				</ul>
+				<div class="clear"> </div>
+
+			</form>
+	</div>
+</body>
+</html>
