@@ -23,7 +23,6 @@ def my_login(request):
     logname = request.POST["logname"]
     logpwd = request.POST["logpwd"]
     user = authenticate(username=logname, password=logpwd)  # 认证用户，判断用户名和密码是否正确
-    print("logname=", logname, "logpwd=", logpwd, "user=", user)
     if user:
         login(request, user)  # 将用户标识保存到session中
         return HttpResponseRedirect("/myblog/goindex/")  # 重定向到首页
@@ -62,13 +61,10 @@ def goarticle(request):
     crtcile_list_length=comment_list.count()
     return render(request, 'article.html', locals())
 
-
-
 def addcomment(request):
     content = request.POST['comment_content']
     u_id = request.GET.get('uid')
     a_id = request.GET.get('aid')
-    print(content, u_id, a_id)
     try:
         Comment.objects.create(content=content,user_id=u_id,article_id=a_id)
         return HttpResponseRedirect('/myblog/goarticle?id=' + a_id, {'msg': '评论成功！'})
